@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/cssStart" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>WGRAJ PLIK</h1>
+        <form id='formID' action="/upload" enctype="multipart/form-data" method="post">
+            <input id="chooseFile" type="file" name="upload" multiple="multiple" accept="image/*" class='inputfile' data-multiple-caption="{count} pliki zaznaczone">
+            <label for="chooseFile" class='inputfile'>wybierz pliki</label></br>
+            <input type="button" value="wyślij" id="send" onclick="checkFiles()">
+        </form>
+    </div>
+    <script>
+        var input = document.getElementById('chooseFile');
+        var label = input.nextElementSibling;
+
+
+        labelVal = label.innerHTML;
+        console.log("labelVal = ", labelVal);
+
+        input.addEventListener('change', function (e) {
+            var fileName = '';
+            if (this.files && this.files.length > 1) {
+                if (this.files.length % 10 > 1 && this.files.length % 10 < 5 && this.files.length > 19) {
+                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+                } else  {
+                fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count} pliki zaznaczone', this.files.length + ' plików zaznaczonych');
+                }
+            }
+            else
+                fileName = e.target.value.split('\\').pop();
+
+            if (fileName)
+                label.innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+
+        function checkFiles() {
+            if (input.files.length < 1) {
+                return false;
+            } else {
+                document.getElementById('formID').submit();
+            }
+
+        }
+    </script>
+</body>
+
+</html>
