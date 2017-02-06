@@ -25,13 +25,10 @@
         input.addEventListener('change', function (e) {
             var fileName = '';
             if (this.files && this.files.length > 1) {
-                if ((this.files.length > 1 && this.files.length < 5) || (this.files.length % 10 > 1 && this.files
-                        .length % 10 < 5 && this.files.length > 19)) {
-                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files
-                        .length);
+                if (this.files.length < 5 || (this.files.length % 10 > 1 && this.files.length % 10 < 5 && this.files.length > 19)) {
+                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
                 } else {
-                    fileName = (this.getAttribute('data-multiple-caption') || '').replace(
-                        '{count} pliki zaznaczone', this.files.length + ' plików zaznaczonych');
+                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count} pliki zaznaczone', this.files.length + ' plików zaznaczonych');
                 }
             } else
                 fileName = e.target.value.split('\\').pop();
